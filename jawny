@@ -1,0 +1,23 @@
+Stos: ()Waga: 20
+Stos: (11,)Waga: 9
+Stos: (8,11,)Waga: 1
+Stos: (7,8,11,)Waga: -6
+Stos: (6,7,8,11,)Waga: -12
+Stos: (7,8,11,)Waga: -6
+Stos: (8,11,)Waga: 1
+Stos: (6,8,11,)Waga: -5
+Stos: (8,11,)Waga: 1
+Stos: (11,)Waga: 9
+Stos: (7,11,)Waga: 2
+Stos: (6,7,11,)Waga: -4
+Stos: (7,11,)Waga: 2
+Stos: (11,)Waga: 9
+Stos: (6,11,)Waga: 3
+Stos: (11,)Waga: 9
+Stos: ()Waga: 20
+Stos: (8,)Waga: 12
+Stos: (7,8,)Waga: 5
+Stos: (6,7,8,)Waga: -1
+Stos: (7,8,)Waga: 5
+(5,7,8,)REC:  20 = 8 7 5 
+ITER: 20 = 

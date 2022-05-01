@@ -50,7 +50,7 @@ import java.util.Scanner;
 /**Klasa implementujaca strukture dancyh zwana stosem*/
 class Stack{
     /*--------Pola--------*/
-    static private int MAX_SIZE = 128;       //Maksymalny rozmiar stosu
+    static private int MAX_SIZE = 48;       //Maksymalny rozmiar stosu
     private int currentSize;                //Obecny rozmiar stosu
     private int[] stack;                    //Stos
 
@@ -138,7 +138,7 @@ class Parametry{
 */
 class StackParam{
     /*--------Pola--------*/
-    static private int MAX_SIZE = 64;           //Maksymalny rozmiar stosu
+    static private int MAX_SIZE = 48;           //Maksymalny rozmiar stosu
     private int currentSize;                    //Obecny rozmiar stosu
     private Parametry[] stack;                  //Stos
 
@@ -243,7 +243,7 @@ class Plecak{
                     stos.pop();
                 }
                 return;                                         //Zakoncz dzialanie
-                }
+            }
             if(potencjalnyElement + 1 == iloscPotencjalnychElementow){  
 
                 if(elem == wagaDocelowa){                   //Znalezione!

@@ -87,10 +87,10 @@ class Stack{
     }
 
     /**Sprawcza czy stos jest pusty*/
-    public boolean isEmpty(){
+    public boolean notEmpty(){
         if(currentSize==0)
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
     /**Zwraca obecny rozmiar stosu */
@@ -175,10 +175,10 @@ class StackParam{
     }
 
     /**Sprawcza czy stos jest pusty*/
-    public boolean isEmpty(){
+    public boolean notEmpty(){
         if(currentSize==0)
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
     /**Zwraca obecny rozmiar stosu */
@@ -224,7 +224,7 @@ class Plecak{
         Parametry parametry;
         stosWywolan.push(new Parametry(stos, pojemnosc, 0));//Pchamy pierwsze wywolanie na stos;
 
-        while(!stosWywolan.isEmpty()){                          //Petla wykonujaca
+        while(stosWywolan.notEmpty()){                          //Petla wykonujaca
             potencjalnyElement = stosWywolan.top().getPE();     //Pobieramy parapetry ze stosu wywolan
             wagaDocelowa = stosWywolan.top().getWaga();
             stos = stosWywolan.top().getStack();
@@ -238,7 +238,7 @@ class Plecak{
             if(wagaDocelowa == 0){                              //Znalezione!
                 znalezioneIter = true;
                 iloscElementowIter= stos.getCurrentSize();      //Przepisz wynik
-                while(!stos.isEmpty()){
+                while(stos.notEmpty()){
                     elementyIter[stos.getCurrentSize()-1] = stos.top();
                     stos.pop();
                 }
@@ -250,7 +250,7 @@ class Plecak{
                     stos.push(elem);
                     znalezioneIter = true;                  //Przepisz wynik
                     iloscElementowIter = stos.getCurrentSize();
-                    while(!stos.isEmpty()){
+                    while(stos.notEmpty()){
                         elementyIter[stos.getCurrentSize()-1] = stos.top();
                         stos.pop();
                     } 
@@ -284,7 +284,7 @@ class Plecak{
         if(wagaDocelowa == 0){                                              //Znalezione!
             znalezioneRe = true;
             iloscElementowRe = stos.getCurrentSize();
-            while(!stos.isEmpty()){
+            while(stos.notEmpty()){
                 elementyRe[stos.getCurrentSize()-1] = stos.top();
                 stos.pop();
             }
@@ -297,7 +297,7 @@ class Plecak{
                 stos.push(elem);
                 znalezioneRe = true;
                 iloscElementowRe = stos.getCurrentSize();
-                while(!stos.isEmpty()){
+                while(stos.notEmpty()){
                     elementyRe[stos.getCurrentSize()-1] = stos.top();
                     stos.pop();
                 }

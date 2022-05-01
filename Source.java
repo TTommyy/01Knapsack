@@ -276,7 +276,7 @@ class Plecak{
     /**Pakwoanie rekurencjne */
     public void pakujRe(){
         Stack stos = new Stack();                                   // Do przechowywania elementow
-        rekurencja(0, pojemnosc, stos);      // Pierwsze wywolanie funkcji
+        rekurencja(0, pojemnosc, stos);           // Pierwsze wywolanie funkcji
             
     }
     /**Funkcja pomocnicza */

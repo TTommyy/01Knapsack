@@ -86,6 +86,14 @@ class Stack{
         return this;
     }
 
+    /**Usuwa ze szczytu i go zwraca*/
+    public int topPop(){
+        if(currentSize == 0){
+            return 0;
+        }
+        return stack[--currentSize];
+    }
+
     /**Sprawcza czy stos jest pusty*/
     public boolean notEmpty(){
         if(currentSize==0)
@@ -97,6 +105,7 @@ class Stack{
     public int getCurrentSize(){
         return currentSize;
     }
+    
 
     /**Wyswietla stos w kolejnosci od pierwszego wlozenego,
      * do ostatniego wlozonego.
@@ -239,8 +248,7 @@ class Plecak{
                 znalezioneIter = true;
                 iloscElementowIter= stos.getCurrentSize();      //Przepisz wynik
                 while(stos.notEmpty()){
-                    elementyIter[stos.getCurrentSize()-1] = stos.top();
-                    stos.pop();
+                    elementyIter[stos.getCurrentSize()-1] = stos.topPop();
                 }
                 return;                                         //Zakoncz dzialanie
             }
@@ -251,8 +259,7 @@ class Plecak{
                     znalezioneIter = true;                  //Przepisz wynik
                     iloscElementowIter = stos.getCurrentSize();
                     while(stos.notEmpty()){
-                        elementyIter[stos.getCurrentSize()-1] = stos.top();
-                        stos.pop();
+                        elementyIter[stos.getCurrentSize()-1] = stos.topPop();
                     } 
                     return;                                 //Zakocz dzialanie                                    
     
@@ -285,8 +292,7 @@ class Plecak{
             znalezioneRe = true;
             iloscElementowRe = stos.getCurrentSize();
             while(stos.notEmpty()){
-                elementyRe[stos.getCurrentSize()-1] = stos.top();
-                stos.pop();
+                elementyRe[stos.getCurrentSize()-1] = stos.topPop();
             }
             return true;
         }
@@ -298,8 +304,7 @@ class Plecak{
                 znalezioneRe = true;
                 iloscElementowRe = stos.getCurrentSize();
                 while(stos.notEmpty()){
-                    elementyRe[stos.getCurrentSize()-1] = stos.top();
-                    stos.pop();
+                    elementyRe[stos.getCurrentSize()-1] = stos.topPop();
                 }
             
                 return true;
@@ -308,9 +313,9 @@ class Plecak{
         }
                                                                      
         return rekurencja(potencjalnyElement+1,                         //Uwzglednij akutalny element   
-        wagaDocelowa-elem, new Stack(stos.push(elem))) 
+        wagaDocelowa-elem, stos.push(elem))
         || rekurencja(potencjalnyElement+1,                             //Nie uwzgledniaj akualengo elementu
-        wagaDocelowa, new Stack(stos.pop())) ;              
+        wagaDocelowa,stos.pop()) ;              
     }
 
     public void prezentuj(){

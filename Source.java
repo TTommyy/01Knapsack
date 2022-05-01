@@ -117,7 +117,7 @@ class Parametry{
     /*--------Metody--------*/
     /**Konstruktor */
     public Parametry(Stack w, int wD,int pE ){
-        wartosci = new Stack(w);
+        wartosci = w;
         wagaDocelowa = wD;
         potencjalnyElement = pE;
     }
@@ -221,8 +221,8 @@ class Plecak{
         Stack stos = new Stack();                               //Przechowuje wagi elementow plecaka
         int potencjalnyElement = 0, elem,                       //Inicjalizacja potrzebnych zmiennych
         wagaDocelowa = pojemnosc;
-        Parametry parametry = new Parametry(stos, pojemnosc, 0);
-        stosWywolan.push(parametry);                            //Pchamy pierwsze wywolanie na stos;
+        Parametry parametry;
+        stosWywolan.push(new Parametry(stos, pojemnosc, 0));//Pchamy pierwsze wywolanie na stos;
 
         while(!stosWywolan.isEmpty()){                          //Petla wykonujaca
             potencjalnyElement = stosWywolan.top().getPE();     //Pobieramy parapetry ze stosu wywolan
@@ -265,12 +265,7 @@ class Plecak{
 
             parametry = new Parametry(new Stack(stos.push(elem)), wagaDocelowa-elem ,potencjalnyElement+1);  //Uwzglednij akutalny element    
             stosWywolan.push(parametry);                                          
-                 
-                   
         }
-        
-         
-
     }
     
     /**Pakwoanie rekurencjne */
@@ -287,31 +282,28 @@ class Plecak{
         if(wagaDocelowa < 0 ) return false;                                 //Jezeli waga jest za duza zwroc false
 
         if(wagaDocelowa == 0){                                              //Znalezione!
-            if(!znalezioneRe){
-                znalezioneRe = true;
-                iloscElementowRe = stos.getCurrentSize();
-                while(!stos.isEmpty()){
-                    elementyRe[stos.getCurrentSize()-1] = stos.top();
-                    stos.pop();
-                }
+            znalezioneRe = true;
+            iloscElementowRe = stos.getCurrentSize();
+            while(!stos.isEmpty()){
+                elementyRe[stos.getCurrentSize()-1] = stos.top();
+                stos.pop();
             }
             return true;
         }
 
         if(potencjalnyElement + 1 == iloscPotencjalnychElementow){     
             if(elem == wagaDocelowa){                                    //Znalezione!
-                if(!znalezioneRe){
-                    stos.push(elem);
-                    znalezioneRe = true;
-                    iloscElementowRe = stos.getCurrentSize();
-                    while(!stos.isEmpty()){
-                        elementyRe[stos.getCurrentSize()-1] = stos.top();
-                        stos.pop();
-                    }
+                
+                stos.push(elem);
+                znalezioneRe = true;
+                iloscElementowRe = stos.getCurrentSize();
+                while(!stos.isEmpty()){
+                    elementyRe[stos.getCurrentSize()-1] = stos.top();
+                    stos.pop();
                 }
+            
                 return true;
-
-                }
+            }
             return false;                                                 //Nie znalezione
         }
                                                                      

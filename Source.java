@@ -204,6 +204,7 @@ class Plecak{
     private int pojemnosc,iloscPotencjalnychElementow,iloscElementowRe,iloscElementowIter; //Samo sie komentuje
     private int[] potencjalneElementy,elementyRe,elementyIter;                             //^^^ 
     private boolean znalezioneRe,znalezioneIter;                                           //^^^
+    private Stack wynikiRe;
     /*********Metody*************/
     /**Konstruktor */
     public Plecak(Scanner sc){
@@ -281,6 +282,22 @@ class Plecak{
         rekurencja(0, pojemnosc, stos);           // Pierwsze wywolanie funkcji
             
     }
+
+    /**Przpisyanie wyniku */
+
+    /*private void przepisz(Stack s, int[] arr){
+        if(!s.notEmpty()) return;
+        arr[s.getCurrentSize()-1] = s.topPop();
+        przepisz(s, arr);
+    }*/
+
+    public void przepiszRe(){
+        if(znalezioneRe){
+            while(wynikiRe.notEmpty()){
+                elementyRe[wynikiRe.getCurrentSize()-1] = wynikiRe.topPop();
+            }
+        }
+    }
     /**Funkcja pomocnicza */
     private boolean rekurencja(int potencjalnyElement, int wagaDocelowa, Stack stos ){
 
@@ -291,9 +308,11 @@ class Plecak{
         if(wagaDocelowa == 0){                                              //Znalezione!
             znalezioneRe = true;
             iloscElementowRe = stos.getCurrentSize();
-            while(stos.notEmpty()){
+            /*while(stos.notEmpty()){
                 elementyRe[stos.getCurrentSize()-1] = stos.topPop();
-            }
+            }*/
+            //przepisz(stos, elementyRe); //Za wolne
+            wynikiRe = stos;
             return true;
         }
 
@@ -303,10 +322,11 @@ class Plecak{
                 stos.push(elem);
                 znalezioneRe = true;
                 iloscElementowRe = stos.getCurrentSize();
-                while(stos.notEmpty()){
+                /*while(stos.notEmpty()){
                     elementyRe[stos.getCurrentSize()-1] = stos.topPop();
-                }
-            
+                }*/
+                //przepisz(stos, elementyRe); //Za wolne
+                wynikiRe = stos;
                 return true;
             }
             return false;                                                 //Nie znalezione
@@ -319,7 +339,7 @@ class Plecak{
     }
 
     public void prezentuj(){
-        if(!znalezioneIter && !znalezioneRe){
+        if(!znalezioneIter || !znalezioneRe){
             System.out.print("BRAK\n");
             return;
         }
@@ -331,6 +351,10 @@ class Plecak{
         for(int i = 0; i< iloscElementowIter; i++)
             System.out.print(elementyIter[i] + " ");
         System.out.print("\n");
+    }
+
+    public boolean isFoudRe(){
+        return znalezioneRe;
     }
 }
 
@@ -347,7 +371,8 @@ public class Source{
         for(int zestaw = 0; zestaw < iloscZestawow; zestaw++){      //Dla kazdego zestawu
             plecak = new Plecak(sc);
             plecak.pakujRe();
-            plecak.pakujIter();
+            plecak.przepiszRe();
+            if(plecak.isFoudRe() )plecak.pakujIter();
             plecak.prezentuj();
         }
 

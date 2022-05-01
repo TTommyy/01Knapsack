@@ -50,7 +50,7 @@ import java.util.Scanner;
 /**Klasa implementujaca strukture dancyh zwana stosem*/
 class Stack{
     /*--------Pola--------*/
-    static private int MAX_SIZE = 64;     //Maksymalny rozmiar stosu
+    static private int MAX_SIZE = 128;       //Maksymalny rozmiar stosu
     private int currentSize;                //Obecny rozmiar stosu
     private int[] stack;                    //Stos
 
@@ -138,7 +138,7 @@ class Parametry{
 */
 class StackParam{
     /*--------Pola--------*/
-    static private int MAX_SIZE = 128;         //Maksymalny rozmiar stosu
+    static private int MAX_SIZE = 64;           //Maksymalny rozmiar stosu
     private int currentSize;                    //Obecny rozmiar stosu
     private Parametry[] stack;                  //Stos
 
@@ -236,8 +236,6 @@ class Plecak{
                 continue;
             }
             if(wagaDocelowa == 0){                              //Znalezione!
-                
-                //stos.display();
                 znalezioneIter = true;
                 iloscElementowIter= stos.getCurrentSize();      //Przepisz wynik
                 while(!stos.isEmpty()){
@@ -249,9 +247,7 @@ class Plecak{
             if(potencjalnyElement + 1 == iloscPotencjalnychElementow){  
 
                 if(elem == wagaDocelowa){                   //Znalezione!
-                        
                     stos.push(elem);
-                    //stos.display();
                     znalezioneIter = true;                  //Przepisz wynik
                     iloscElementowIter = stos.getCurrentSize();
                     while(!stos.isEmpty()){
@@ -275,22 +271,23 @@ class Plecak{
         
          
 
-        }
+    }
     
     /**Pakwoanie rekurencjne */
     public void pakujRe(){
         Stack stos = new Stack();                                   // Do przechowywania elementow
-        rekurencja(0, pojemnosc, stos,0);      // Pierwsze wywolanie funkcji
+        rekurencja(0, pojemnosc, stos);      // Pierwsze wywolanie funkcji
             
     }
     /**Funkcja pomocnicza */
-    private boolean rekurencja(int potencjalnyElement, int wagaDocelowa, Stack stos, int i){
-        //System.out.print("Wywolanie: " + i + " Stos: "); stos.display(); System.out.println("Waga: " + wagaDocelowa);
+    private boolean rekurencja(int potencjalnyElement, int wagaDocelowa, Stack stos ){
+
         int elem = potencjalneElementy[potencjalnyElement];                 //Pobieramy rozwazany element
+
         if(wagaDocelowa < 0 ) return false;                                 //Jezeli waga jest za duza zwroc false
+
         if(wagaDocelowa == 0){                                              //Znalezione!
             if(!znalezioneRe){
-                //stos.display();
                 znalezioneRe = true;
                 iloscElementowRe = stos.getCurrentSize();
                 while(!stos.isEmpty()){
@@ -299,27 +296,30 @@ class Plecak{
                 }
             }
             return true;
-            }
-            if(potencjalnyElement + 1 == iloscPotencjalnychElementow){     
-                if(elem == wagaDocelowa){                                    //Znalezione!
-                    if(!znalezioneRe){
-                        stos.push(elem);
-                        //stos.display();
-                        znalezioneRe = true;
-                        iloscElementowRe = stos.getCurrentSize();
-                        while(!stos.isEmpty()){
-                            elementyRe[stos.getCurrentSize()-1] = stos.top();
-                            stos.pop();
-                        }
+        }
+
+        if(potencjalnyElement + 1 == iloscPotencjalnychElementow){     
+            if(elem == wagaDocelowa){                                    //Znalezione!
+                if(!znalezioneRe){
+                    stos.push(elem);
+                    znalezioneRe = true;
+                    iloscElementowRe = stos.getCurrentSize();
+                    while(!stos.isEmpty()){
+                        elementyRe[stos.getCurrentSize()-1] = stos.top();
+                        stos.pop();
                     }
-                    return true;
+                }
+                return true;
 
                 }
-                return false;                                                 //Nie znalezione
-            }
-                    //Uwzglednij akutalny element                                                     //Nie uwzgledniaj akualengo elementu
-            return rekurencja(potencjalnyElement+1, wagaDocelowa-elem, new Stack(stos.push(elem)),i+1) || rekurencja(potencjalnyElement+1, wagaDocelowa, new Stack(stos.pop()),i+1) ; 
+            return false;                                                 //Nie znalezione
         }
+                                                                     
+        return rekurencja(potencjalnyElement+1,                         //Uwzglednij akutalny element   
+        wagaDocelowa-elem, new Stack(stos.push(elem))) 
+        || rekurencja(potencjalnyElement+1,                             //Nie uwzgledniaj akualengo elementu
+        wagaDocelowa, new Stack(stos.pop())) ;              
+    }
 
     public void prezentuj(){
         if(!znalezioneIter && !znalezioneRe){
